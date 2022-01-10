@@ -1,4 +1,8 @@
-                 [Tasker](./images/logo.png)
+<p align="center">
+  <img src="./images/logo.png" width="350" title="hover text">
+</p>
+
+
 
 # Tasker
 
