@@ -50,7 +50,7 @@ function App() {
                 </Link>
 
               </div>
-            </ div>
+            </ div> s=
 
             <div className="my-5">
               <div className='mx-5   px-5 flex justify-between rounded-lg py-3  items-center bg-indigo-600 '> <div className='flex items-center'>  <FiTrendingUp className='mr-2' /> <h3 className="text-white font-medium "> {"On Progress"}  </h3></div>  <span className="mx-5 font-medium text-white" > {tasks.filter(task => task.status !== "1").length} </span> </div>
