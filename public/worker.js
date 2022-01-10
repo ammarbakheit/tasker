@@ -2,7 +2,6 @@ var CACHE_NAME = 'tasker';
 var urlsToCache = [
   '/',
   '/completed',
-  "/static/js/bundle.js"
 ];
 
 // Install a service worker
