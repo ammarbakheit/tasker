@@ -42,7 +42,7 @@ function App() {
 
             <div className=' sm:max-w-full'>
 
-              <div className=" mx-5  py-4 px-10 bg-white shadow-md rounded-lg  ">
+              <div className="my-5 mx-5  py-4 px-10 bg-white shadow-md rounded-lg  ">
 
               
                 <Link to="/add-task">
@@ -52,7 +52,7 @@ function App() {
               </div>
             </ div>
 
-            <div className="">
+            <div className="my-5">
               <div className='mx-5   px-5 flex justify-between rounded-lg py-3  items-center bg-indigo-600 '> <div className='flex items-center'>  <FiTrendingUp className='mr-2' /> <h3 className="text-white font-medium "> {"On Progress"}  </h3></div>  <span className="mx-5 font-medium text-white" > {tasks.filter(task => task.status !== "1").length} </span> </div>
 
               {
@@ -63,7 +63,7 @@ function App() {
               }
             </div>
 
-            <div className="">
+            <div className="my-5">
               <div className='mx-5   px-5 flex justify-between rounded-lg py-3  items-center bg-green-600'> <div className='flex items-center '>  <FiCheck className='mr-2' />  <h3 className="text-white font-medium "> {"Done"} </h3></div><span className="mx-5 font-medium text-white" > {tasks.filter(task => task.status === "1").length} </span> </div>
 
               {

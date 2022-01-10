@@ -1,6 +1,10 @@
 {
   "short_name": "Tasker",
   "name": "Tasker",
+  "start_url": ".",
+  "background_color": "#673ab7",
+  "theme_color": "#673ab7",
+  "display": "standalone",
   "icons": [
     {
       "src": "favicon.ico",
@@ -17,9 +21,6 @@
       "type": "image/png",
       "sizes": "512x512"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#4f46e5",
-  "background_color": "#4f46e5"
+  ]
+ 
 }
