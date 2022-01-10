@@ -1,4 +1,4 @@
-                 [Tasker](./images/logo.png)
+                 ![Tasker](./images/logo.png)
 
 # Tasker
 
