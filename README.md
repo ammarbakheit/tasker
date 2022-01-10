@@ -1,6 +1,9 @@
 <p align="center">
   <img src="./images/logo.png" width="350" title="hover text">
 </p>
+
+
+
 # Tasker
 
 Tasker is a Progressive Web App, will help you keep track of your daily tasks 
