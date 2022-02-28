@@ -13,7 +13,7 @@ const AddTask = () => {
     const [desc, setDesc] = useState('');
     const [status, setStatus] = useState('0');
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
     const navigate = useNavigate();
 
     const formHandler = e => {

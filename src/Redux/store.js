@@ -13,5 +13,5 @@ const sagaMiddleware = createSagaMiddleware();
     middleware: [sagaMiddleware]
 } );
 sagaMiddleware.run(watcherSaga);
-
+ 
 export default store;
