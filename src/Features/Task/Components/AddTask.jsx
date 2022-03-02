@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { addTask } from "../Features/Task/TaskSlice";
 
 const AddTask = () => {
     let [counter, setCount] = useState(1);
@@ -26,7 +25,7 @@ const AddTask = () => {
             status
         };
         console.log(subtasks);
-        dispatch(addTask({ ...newTask }))
+        // dispatch(addTask({ ...newTask }))
         navigate("/")
         // }
 
