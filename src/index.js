@@ -4,9 +4,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import AddTask from './Components/AddTask';
+
 import { Provider } from 'react-redux';
 import store from "./Redux/store";
+import AddTask from './Features/Task/Components/AddTask';
 
 // const store = createStore(rootReducer,
 //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

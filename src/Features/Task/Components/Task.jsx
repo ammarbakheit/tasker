@@ -1,6 +1,6 @@
 import { React } from "react";
 import { useDispatch } from "react-redux";
-import { checkTask, deleteTask } from '../Features/Task/TaskSlice';
+// import { checkTask, deleteTask } from '../../../Redux/TaskSlice';
 import { FiXCircle, FiTrash } from "react-icons/fi";
 import { IconContext } from "react-icons";
 
@@ -29,7 +29,10 @@ const Task = ({ task }) => {
         <div className="  flex items-center justify-between ">
 
           <div className="flex items-center justify-between">
-            <button onClick={() => dispatch(deleteTask(task.id))}>
+            <button onClick={
+              () => {}
+              // () => dispatch(deleteTask(task.id))
+              }>
               <IconContext.Provider value={{ color: "red", className: "global-class-name" }}>
                 <div>
                   <FiTrash className="mr-2 indigo-600" />
@@ -52,8 +55,13 @@ const Task = ({ task }) => {
 
 
           {
-            task.status === "0" ? <input onChange={() => dispatch(checkTask(task.id))} type="checkbox" className="form-checkbox rounded" />
-              : <input checked onChange={() => dispatch(checkTask(task.id))} type="checkbox" className="form-checkbox rounded  border-green-600 checked:bg-green-600" />
+            task.status === "0" ? <input onChange={() => {}
+              //  dispatch(checkTask(task.id))
+              }
+                type="checkbox" className="form-checkbox rounded" />
+              : <input checked onChange={() => {}
+                // dispatch(checkTask(task.id) 
+                } type="checkbox" className="form-checkbox rounded  border-green-600 checked:bg-green-600" />
           }
 
 
