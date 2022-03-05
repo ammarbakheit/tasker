@@ -1,183 +1,99 @@
+import ReactLoading from 'react-loading';
 
 import { useEffect, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
-
+import { moveTheTask } from "../../../Redux/TaskSlice";
+import { useDispatch, useSelector } from "react-redux";
 const Main = () => {
-    let [todos, setTodos] = useState([{
-        id: 1,
-        title: "learn javascript",
-        status: 1
-    },
-    {
-        id: 2,
-        title: "learn react",
-        status: 1
 
-    },]);
-    let [inProgress, setInprogress] = useState([{
-        id: 3,
-        title: "learn redux",
-        status: 2
+    const todosList = useSelector(state => state.task.todosList);
+    const inProgressList = useSelector(state => state.task.inProgressList);
+    const doneList = useSelector(state => state.task.doneList);
+    const dispatch = useDispatch();
+    // console.log(todosList);
 
-    },]);
-    let [done, setDone] = useState([{
-        id: 4,
-        title: "learn node.js",
-        status: 3
-
-    }]);
-
+ 
+    // drop event handler
     const [{ todosIsOver }, todoDrop] = useDrop(() => ({
         accept: "task",
-        drop: (item) => addToTodos(item),
+        drop: (item) => dispatch(moveTheTask({ task: item, moveToListid: 1, currentListId: item.status })),
         collect: (monitor) => ({
             todosIsOver: !!monitor.isOver()
         })
     }));
-    const addToTodos = (task) => {
-        console.log(task);
-           // determine which list task belongs to
-         // remove it from that list
-         let filterd = [];
-         switch (task.status) {
-            
-            case 1:
-                console.log(todos);
-                 filterd = todos.filter(todo => todo.id !== task.id);
-                setTodos([...filterd])
-                console.log(filterd);
-
-                break;
-            case 2:
-                 filterd = inProgress.filter(todo => todo.id !== task.id);
-                setInprogress([...filterd])
-                break;
-            case 3:
-                 filterd = done.filter(todo => todo.id !== task.id);
-                setDone([...filterd])
-                break;
-        
-            default:
-                break;
-        }
- 
-        
- 
- 
-         // add it to the new list
-        setTodos(todos => [...todos, task])
-    }
+  
+    // drop event handler
 
     const [{ inProgressIsOver }, inProgressDrop] = useDrop(() => ({
         accept: "task",
-        drop: (item) => addToInProgress(item),
+        drop: (item) => dispatch(moveTheTask({ task: item, moveToListid: 2, currentListId: item.status })),
         collect: (monitor) => ({
             inProgressIsOver: !!monitor.isOver()
         })
     }));
-    const addToInProgress = (task) => {
-        console.log(task);
-        // determine which list task belongs to
-         // remove it from that list
-        let filterd = [];
-        switch (task.status) {
-            
-            case 1:
-                console.log(todos);
-                 filterd = todos.filter(todo => todo.id !== task.id);
-                setTodos([...filterd])
-                console.log(filterd);
+  
 
-                break;
-            case 2:
-                 filterd = inProgress.filter(todo => todo.id !== task.id);
-                setInprogress([...filterd])
-                break;
-            case 3:
-                 filterd = done.filter(todo => todo.id !== task.id);
-                setDone([...filterd])
-                break;
-        
-            default:
-                break;
-        }
-
-       
-
-
-        // add it to the new list
-        setInprogress(inProgress => [...inProgress, task])
-
-    }
-
+    // drop event handler
     const [{ doneIsOver }, doneDrop] = useDrop(() => ({
         accept: "task",
-        drop: (item) => addToDone(item),
+        drop: (item) => dispatch(moveTheTask({ task: item, moveToListid: 3, currentListId: item.status })),
         collect: (monitor) => {
             // console.log(monitor);
             return { doneIsOver: !!monitor.isOver() }
         }
     }));
-    const addToDone = (task) => {
-        console.log(task);
-           // determine which list task belongs to
-         // remove it from that list
-         let filterd = [];
-         switch (task.status) {
-            
-            case 1:
-                console.log(todos);
-                 filterd = todos.filter(todo => todo.id !== task.id);
-                setTodos([...filterd])
-                console.log(filterd);
-
-                break;
-            case 2:
-                 filterd = inProgress.filter(todo => todo.id !== task.id);
-                setInprogress([...filterd])
-                break;
-            case 3:
-                 filterd = done.filter(todo => todo.id !== task.id);
-                setDone([...filterd])
-                break;
-        
-            default:
-                break;
-        }
- 
-        
- 
- 
-         // add it to the new list
-        setDone(dones => [...dones, task])
-
-    }
 
 
-    // console.log({ todos, inProgress, done });
+    // page loading
+    const [loading, setLoading] = useState(false);
+    useEffect(() =>{
+      setLoading (true);
+  
+     let timer = setTimeout(() => {
+        setLoading(false);
+  
+      
+      }, 1000);
+  
+      return () => {
+        clearTimeout(timer)
+      }
+    }, [])
+
+
     return (
 
-        <div className="px-10 w-full">
-            <span className="font-bold text-lg mx-2">Tasks</span>
+        <div className="px-10 w-full min-h-screen">
+            {
+                 loading ?   <div className='w-full min-h-screen flex justify-center items-center'><ReactLoading type={"balls"} color={"#6366f1"} height={50} width={50} /></div>  : <> 
+                     <span className="font-bold text-lg mx-2">Tasks</span>
             <div className=" flex lg:flex-row flex-col">
 
 
 
-                <div ref={todoDrop}>  <Col type={1} title="todo" tasks={todos} /></div>
+                <div className="w-full mx-2 my-2 flex flex-col justify-start bg-indigo-50 px-5 py-2 rounded-lg" ref={todoDrop}>
+                    <Col type={1} title="todo" tasks={todosList} />
+                </div>
 
 
 
 
-                <div ref={inProgressDrop}>  <Col type={2} title="in progress" tasks={inProgress} /></div>
+                <div className="w-full mx-2 my-2 flex flex-col justify-start bg-indigo-50 px-5 py-2 rounded-lg" ref={inProgressDrop}>
+                    <Col type={2} title="in progress" tasks={inProgressList} />
+                </div>
 
 
-                <div ref={doneDrop}>  <Col type={3} title="done" tasks={done} />
+                <div className="w-full mx-2 my-2 flex flex-col justify-start bg-indigo-50 px-5 py-2 rounded-lg" ref={doneDrop}>
+                    <Col type={3} title="done" tasks={doneList} />
                 </div>
 
 
 
 
             </div>
+                 </>
+            }
+        
 
 
         </div>
@@ -187,24 +103,6 @@ const Main = () => {
 
 export default Main;
 
-const UserPadge = ({ typeId }) => {
-    switch (typeId) {
-        case 1:
-            return (<div className="w-7 h-7 bg-yellow-500 rounded-3xl"></div>)
-            break;
-
-        case 2:
-            return (<div className="w-7 h-7 bg-blue-500 rounded-3xl"></div>)
-            break;
-
-        case 3:
-            return (<div className="w-7 h-7 bg-green-500 rounded-3xl"></div>)
-            break;
-
-        default: (<div className="w-7 h-7 bg-indigo-500 rounded-3xl"></div>)
-            break;
-    }
-}
 const TaskTik = ({ typeId }) => {
     switch (typeId) {
         case 1:
@@ -225,20 +123,18 @@ const TaskTik = ({ typeId }) => {
 }
 const Col = ({ tasks, title, type }) => {
 
-
     return (
-        <div className="w-full mx-2 my-2 flex flex-col justify-start bg-indigo-50 px-5 py-2 rounded-lg">
+        <div className="">
             <div className="flex flex-row justify-between">
                 <span className="font-medium text-sm"> {title} </span>
                 <div className="bg-indigo-100 w-6 h-6 flex justify-center items-center rounded-lg">
-                    <span className="text-xs font-medium text-indigo-900"> 0</span>
+                    <span className="text-xs font-medium text-indigo-900">{tasks.length} </span>
                 </div>
             </div>
 
             <div className="py-2">
                 <button className="bg-indigo-300 w-full rounded-lg py-1 flex justify-center items-center text-white font-medium"> + </button>
             </div>
-
 
             <div className="py-2">
                 {

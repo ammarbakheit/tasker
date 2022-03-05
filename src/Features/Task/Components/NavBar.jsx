@@ -1,4 +1,6 @@
+
 const NavBar = () => {
+
   return (
     <div className="flex lg:flex-row flex-col-reverse flex-col justify-between items-start w-full px-10 py-10">
       <input type="text" placeholder="Search" className="py-1 flex-1  border-indigo-100 border-1 focus:ring-indigo-200   w-full shadow-sm sm:text-sm  rounded-md" />

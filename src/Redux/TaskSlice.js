@@ -6,7 +6,30 @@ import Status from "../Common/Status";
 const taskSlice = createSlice({
     name: "task",
     initialState: {
-        tasks: [],
+        AllTasks: [],
+        todosList: [{
+            id: 1,
+            title: "learn javascript",
+            status: 1
+        },
+        {
+            id: 2,
+            title: "learn react",
+            status: 1
+
+        }],
+        inProgressList: [{
+            id: 3,
+            title: "learn redux",
+            status: 2
+
+        }],
+        doneList: [{
+            id: 4,
+            title: "learn node.js",
+            status: 3
+
+        }],
         status: Status.idle,
     },
     reducers: {
@@ -19,9 +42,73 @@ const taskSlice = createSlice({
         addTaskSuccess: (state, action) => { },
         addTaskFailure: (state, action) => { },
 
-        checkTask: (state, action) => { },
-        checkTaskSuccess: (state, action) => { },
-        checkTaskFailure: (state, action) => { },
+        moveTheTask: (state, action) => {
+            const { task, moveToListid, currentListId } = action.payload;
+
+            let filteredCurrentList = [];
+            if (currentListId === 1) {
+
+                // removing the task from prev list
+                filteredCurrentList = state.todosList.filter(todo => todo.id !== task.id);
+                state.todosList = [...filteredCurrentList];
+
+
+
+                // adding the task to the new list
+                if (moveToListid === 2) {
+                    state.inProgressList = [...state.inProgressList, {
+                        ...task,
+                        status: 2
+                    }]
+                }
+                else if (moveToListid === 3) {
+                    state.doneList = [...state.doneList, {
+                        ...task,
+                        status: 3
+                    }]
+                }
+            }
+            else if (currentListId === 2) {
+                filteredCurrentList = state.inProgressList.filter(todo => todo.id !== task.id);
+                state.inProgressList = [...filteredCurrentList];
+                // modifying the task status
+
+                // adding the task to the new list
+                if (moveToListid === 1) {
+                    state.todosList = [...state.todosList, {
+                        ...task,
+                        status: 1
+                    }]
+                }
+                else if (moveToListid === 3) {
+                    state.doneList = [...state.doneList, {
+                        ...task,
+                        status: 3
+                    }]
+                }
+            }
+            else if (currentListId === 3) {
+                filteredCurrentList = state.doneList.filter(todo => todo.id !== task.id);
+                state.doneList = [...filteredCurrentList];
+
+                // adding the task to the new list
+                if (moveToListid === 1) {
+                    state.todosList = [...state.todosList, {
+                        ...task,
+                        status: 1
+                    }]
+                }
+                else if (moveToListid === 2) {
+                    state.inProgressList = [...state.inProgressList, {
+                        ...task,
+                        status: 2
+                    }]
+                }
+            }
+
+            // console.log({task, moveToListid, currentListId});
+
+        },
 
         deleteTask: (state, action) => { },
         deleteTaskSuccess: (state, action) => { },
@@ -32,7 +119,7 @@ const taskSlice = createSlice({
 // exporting the actions from our slice 
 export const { getTasks, setTasksSucess, setTasksFailure,
     addTask, addTaskSuccess, addTaskFailure,
-    checkTask, checkTaskSuccess, checkTaskFailure,
+    moveTheTask,
     deleteTask, deleteTaskSuccess, deleteTaskFailure } = taskSlice.actions;
 
 export default taskSlice.reducer;
