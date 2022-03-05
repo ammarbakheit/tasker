@@ -7,7 +7,8 @@ import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
 import store from "./Redux/store";
-import AddTask from './Features/Task/Components/AddTask';
+import HabitsTracker from './Features/Task/Components/Habits-Tracker/Habits-Tracker';
+import Main from './Features/Task/Components/Main';
 
 // const store = createStore(rootReducer,
 //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -17,8 +18,8 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Routes>
-        <Route path="/"  element={ <App /> } />
-        <Route path="/add-task"  element={ <AddTask /> } />
+        <Route path="/"  element={ <App children={ <Main/>} /> } />
+        <Route path="/habits-tracker"  element={ <App children={<HabitsTracker/>} /> } />
       </Routes>
     </Router>,
   </Provider>,
