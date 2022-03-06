@@ -12,7 +12,7 @@ export default function HabitsTracker() {
       setLoading(false);
 
 
-    }, 1000);
+    }, 500);
 
     return () => {
       clearTimeout(timer)
@@ -21,10 +21,10 @@ export default function HabitsTracker() {
 
   console.log(loading);
   return (
-    <div className='w-full min-h-screen flex justify-center items-center'>
+    <div className='w-full  flex justify-center items-center'>
       {
         loading ?
-          <div className='w-full flex justify-center'>
+          <div className='w-full min-h-screen flex items-center justify-center'>
             <ReactLoading type={"balls"} color={"#6366f1"} height={50} width={50} />
           </div> :
           <div>HabitsTracker</div>
