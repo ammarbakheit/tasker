@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import Status from "../Common/Status";
+import { createSlice } from "@reduxjs/toolkit"; 
+import Status from "../../../Common/Status";
 
 
 // defining a slice containing  [ initial state, reducers and actions ]
@@ -20,7 +20,7 @@ const taskSlice = createSlice({
         }],
         inProgressList: [{
             id: 3,
-            title: "learn redux",
+            title: "learn redux, redux toolkit, redux-saga, redux-thunk",
             status: 2
 
         }],
@@ -46,7 +46,7 @@ const taskSlice = createSlice({
             const { task, moveToListid, currentListId } = action.payload;
 
             let filteredCurrentList = [];
-            if (currentListId === 1) {
+            if (currentListId === 1 && moveToListid !== 1) {
 
                 // removing the task from prev list
                 filteredCurrentList = state.todosList.filter(todo => todo.id !== task.id);
@@ -55,7 +55,8 @@ const taskSlice = createSlice({
 
 
                 // adding the task to the new list
-                if (moveToListid === 2) {
+              
+                if (moveToListid === 2 ) {
                     state.inProgressList = [...state.inProgressList, {
                         ...task,
                         status: 2
@@ -68,7 +69,7 @@ const taskSlice = createSlice({
                     }]
                 }
             }
-            else if (currentListId === 2) {
+            else if (currentListId === 2 && moveToListid !== 2) {
                 filteredCurrentList = state.inProgressList.filter(todo => todo.id !== task.id);
                 state.inProgressList = [...filteredCurrentList];
                 // modifying the task status
@@ -87,7 +88,7 @@ const taskSlice = createSlice({
                     }]
                 }
             }
-            else if (currentListId === 3) {
+            else if (currentListId === 3 && moveToListid !== 3) {
                 filteredCurrentList = state.doneList.filter(todo => todo.id !== task.id);
                 state.doneList = [...filteredCurrentList];
 
