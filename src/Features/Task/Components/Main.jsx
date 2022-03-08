@@ -169,7 +169,7 @@ const TaskItem = ({ task, type }) => {
         <>
          <div>
 
-<SingleTask onCloseTask={() => setShowTask(false)} showTask={showTask} />
+<SingleTask task={task} onCloseTask={() => setShowTask(false)} showTask={showTask} />
         </div>
         <div
             ref={drag}

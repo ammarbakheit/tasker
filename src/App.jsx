@@ -6,6 +6,8 @@ import NavBar from "./Features/Task/Components/NavBar";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Login from "./Features/Auth/Components/Login";
+import { useEffect, useState } from "react";
+import Intro from "./Features/Intro/Components/Intro";
 
 function App({children}) {
   // const dispatch = useDispatch();
@@ -13,14 +15,20 @@ function App({children}) {
   const tasks = useSelector(state => state.tasks);
   const user = useSelector(state => state.auth.user);
 
-  console.log(user);
-  // useEffect(() => {
-  //   // if (tasks.length === 0) {
-  //   //   // dispatch(getTasks());
+const [initialLoading, setLoading] = useState(false);
 
-  //   // }
-  // }, [dispatch]);
+  useEffect(() => {
+    setLoading(true)
+    const timer = setTimeout(() => {
+      setLoading(false)
+    },2000)
 
+    return () => {
+      clearTimeout(timer);
+    }
+  }, []);
+
+  console.log(initialLoading);
 
   // console.log(tasks.length);
 
@@ -29,17 +37,19 @@ function App({children}) {
     <IconContext.Provider value={{ color: "white", className: "global-class-name" }}>
 
       <div className="w-full  bg-white">
-        <div className=" flex w-full   mx-auto">
-          <SideBar  />
-          <div className="w-full">
-            <NavBar/>
-          { 
-              user ? 
-              children : <div className="w-full flex justify-center"> <Login onClose={() => console.log("close")} showLoginForm={true} /> </div>
-          }
-          </div>
+      {
+         initialLoading ? <Intro /> :  <div className=" flex w-full   mx-auto">
+         <SideBar  />
+         <div className="w-full">
+           <NavBar/>
+         {
+             user ? 
+             children : <div className="w-full flex justify-center"> <Login onClose={() => console.log("close")} showLoginForm={true} /> </div>
+         }
+         </div>
 
-        </div>
+       </div>
+      } 
       </div>
     </IconContext.Provider>
   </DndProvider>

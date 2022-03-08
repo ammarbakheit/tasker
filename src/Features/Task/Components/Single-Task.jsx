@@ -1,52 +1,71 @@
 import React from 'react'
 
-export default function SingleTask({ showTask, onCloseTask }) {
+export default function SingleTask({ task, showTask, onCloseTask }) {
 
+    const Badge = ({statusId}) => {
+        switch (statusId) {
+            case 1:
+                return (
+                    <div className="flex items-center my-2 w-full">
+                        <div className="bg-yellow-300 w-full rounded-lg flex items-center py-2 pl-2">
+                            <input type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                                className="todoradioButton" readOnly checked />
+                            <label htmlFor="country-option-3" className="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                Todo
+                            </label>
+                        </div>
+                    </div>
+                )
+                break;
+            case 2:
+                return (
+                    <div className="flex items-center my-2 w-full">
+                    <div className="bg-blue-300 w-full rounded-lg flex items-center py-2 pl-2">
+                        <input type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                            className="InProgressradioButton" readOnly checked/>
+                        <label htmlFor="country-option-3" className="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            In Progress
+                        </label>
+                    </div>
+                </div>
+                )
+                break;
+            case 3:
+                return (
+                    <div className="flex items-center my-2 w-full">
+                    <div className="bg-green-300 w-full rounded-lg flex items-center py-2 pl-2">
+                        <input type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                            className="doneradioButton" readOnly checked />
+                        <label htmlFor="country-option-3" className="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Done
+                        </label>
+                    </div>
+                </div>
+                )
+                break;
 
-
+            default:
+                break;
+        }
+    }
+    console.log(task);
     if (!showTask) {
         return null;
     }
     return (
         (
-            <div className="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 flex bg-indigo-900 bg-opacity-30 justify-center items-center md:inset-0 h-modal sm:h-full" id="small-modal">
+            <div onClick={onCloseTask} className="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 flex bg-indigo-900 bg-opacity-30 justify-center items-center md:inset-0 h-modal sm:h-full" id="small-modal">
                 <div className="relative px-4 w-full max-w-md h-full md:h-auto">
                     <form action="#" >
                         <div className="relative bg-indigo-100 rounded-lg shadow ">
                             <div className="max-w-md py-4 px-10 ">
 
-
+                           <span className='text-lg font-medium'> {task.title} </span>
                                 <div className="py-3  w-full">
                                     <span className="text-indigo-500 font-medium">Belongs To</span>
+                                    <Badge statusId={task.status} />
 
-
-                                    <div className="flex items-center my-2 w-full">
-                                        <div className="bg-yellow-300 w-full rounded-lg flex items-center py-2 pl-2">
-                                            <input type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                                                className="todoradioButton" />
-                                            <label htmlFor="country-option-3" className="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                Todo
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center my-2 w-full">
-                                        <div className="bg-blue-300 w-full rounded-lg flex items-center py-2 pl-2">
-                                            <input type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                                                className="InProgressradioButton" />
-                                            <label htmlFor="country-option-3" className="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                In Progress
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center my-2 w-full">
-                                        <div className="bg-green-300 w-full rounded-lg flex items-center py-2 pl-2">
-                                            <input type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                                                className="doneradioButton" />
-                                            <label htmlFor="country-option-3" className="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                Done
-                                            </label>
-                                        </div>
-                                    </div>
+                                 
 
                                 </div>
 
