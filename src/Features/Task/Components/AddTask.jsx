@@ -14,14 +14,18 @@ const AddTask = ({ show, onClose }) => {
     }
 
 
-
+    const hanndleClose = (e) => {
+        if(e.target.className.includes("background")) {
+            onClose();
+        }
+     }
 
     if (!show) {
         return null;
     }
     return (
 
-        <div  onClick={onClose} className="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 flex bg-indigo-900 bg-opacity-30 justify-center items-center md:inset-0 h-modal sm:h-full" id="small-modal">
+        <div  onClick={(e) => hanndleClose(e)} className="background overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 flex bg-indigo-900 bg-opacity-30 justify-center items-center md:inset-0 h-modal sm:h-full" id="small-modal">
             <div className="relative px-4 w-full max-w-md h-full md:h-auto">
                 <form action="#" onSubmit={formHandler}>
                     <div className="relative bg-indigo-100 rounded-lg shadow ">
