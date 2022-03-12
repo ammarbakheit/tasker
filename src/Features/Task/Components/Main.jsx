@@ -76,8 +76,6 @@ const Main = () => {
                         </div>
 
 
-
-
                         <div className="w-full mx-2 my-2 flex flex-col justify-start bg-indigo-50 px-5 py-2 rounded-lg" ref={inProgressDrop}>
                             <Col type={2} title="in progress" tasks={inProgressList} />
                         </div>
@@ -86,20 +84,10 @@ const Main = () => {
                         <div className="w-full mx-2 my-2 flex flex-col justify-start bg-indigo-50 px-5 py-2 rounded-lg" ref={doneDrop}>
                             <Col type={3} title="done" tasks={doneList} />
                         </div>
-
-
-
-
                     </div>
-
-
                 </>
             }
-
-
-
         </div>
-
     );
 }
 
@@ -122,27 +110,20 @@ const Col = ({ tasks, title, type }) => {
                     <span className="text-xs font-medium text-indigo-900">{tasks.length} </span>
                 </div>
             </div>
-
             <div className="py-2">
                 <button onClick={(e) => handler()} className="bg-indigo-300 w-full rounded-lg py-1 flex justify-center items-center text-white font-medium"> + </button>
             </div>
-
             <div className="py-2">
                 {
                     tasks.map(task => {
                         return (
-
                             <TaskItem key={task.id} task={task} type={type} />
                         )
                     })
                 }
-
             </div>
-
         </div>
     );
-
-
 }
 
 
@@ -155,43 +136,35 @@ const TaskItem = ({ task, type }) => {
             return { isDraging: !!monitor.isDragging() }
         }
     }));
-
-
     //show single task handler
     const [showTask, setShowTask] = useState(false);
     const handler = () => {
         setShowTask(true)
-      
     }
-
-
     return (
         <>
-         <div>
+            <div>
 
-<SingleTask task={task} onCloseTask={() => setShowTask(false)} showTask={showTask} />
-        </div>
-        <div
-            ref={drag}
-            className={"cursor-pointer"}
-            onClick={(e) => handler()}
-        >
-               
-            <div key={task.id} className={"bg-white rounded-lg pr-2  my-2 shadow-md shadow-slate-300  flex "}>
-                <TaskTik typeId={type} />
-                <div className="px-2 py-2 flex   flex-row w-full justify-start items-center">
-                 
-                    <span > {task.title}</span>
-                </div>
-            
+                <SingleTask task={task} onCloseTask={() => setShowTask(false)} showTask={showTask} />
             </div>
-        </div>
-        </>
-       
+            <div
+                ref={drag}
+                className={"cursor-pointer"}
+                onClick={(e) => handler()}
+            >
 
+                <div key={task.id} className={"bg-white rounded-lg pr-2  my-2 shadow-md shadow-slate-300  flex "}>
+                    <TaskTik typeId={type} />
+                    <div className="px-2 py-2 flex   flex-row w-full justify-start items-center">
+
+                        <span > {task.title}</span>
+                    </div>
+
+                </div>
+            </div>
+        </>
     );
 }
-
 const TaskTik = ({ typeId }) => {
     switch (typeId) {
         case 1:
