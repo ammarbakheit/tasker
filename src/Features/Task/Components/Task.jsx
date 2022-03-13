@@ -21,7 +21,6 @@ const Task = ({ task }) => {
         break;
     }
   }
-
   return (
     <div>
       <div className=" sm:max-w-full mx-5 my-5  py-4 px-10 bg-white shadow-md rounded-lg     task">
