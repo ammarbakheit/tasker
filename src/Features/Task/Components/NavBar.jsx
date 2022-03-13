@@ -17,9 +17,7 @@ const handler = () => {
           </div>
           <span className="mx-4 font-medium text-sm">Amar Bakheit </span>
         </div>
-
       </div>
-
     </div>
   );
 }

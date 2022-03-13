@@ -19,7 +19,6 @@ const SideBar = () => {
         </Link>
 
         <ul className="space-y-2">
-
           <li>
             <Link to="/">
               <div className="sidebar-item">  <span> Overview</span> <div className="flex justify-center items-center bg-indigo-600 text-white font-medium  rounded-lg w-6 h-6">
@@ -42,5 +41,4 @@ const SideBar = () => {
     </aside>
   );
 }
-
 export default SideBar;
