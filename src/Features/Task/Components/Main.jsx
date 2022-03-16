@@ -63,7 +63,7 @@ const Main = () => {
 
     return (
 
-        <div className="px-10 w-full ">
+        <div className="px-10 w-full mt-10">
             {
                 loading ? <div className='w-full min-h-screen  flex justify-center items-center'><ReactLoading type={"balls"} color={"#6366f1"} height={50} width={50} /></div> : <>
                     <span className="font-bold text-lg mx-2">Tasks</span>

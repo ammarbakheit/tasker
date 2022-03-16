@@ -1,11 +1,27 @@
-// import { addTask, getTasks, checkTask, deleteTask  } from "../../Features/Task/TaskSlice";
-// import { addNewTask, checkAtask, getAllTasks, deleteAtask } from "./taskSaga";
 import { call, takeEvery, takeLatest,  put } from "redux-saga/effects";
+import {  
+    getCurrentUser,
+    getCurrentUserFailed,
+    getCurrentUserSuccess,
+
+    login,
+    loginSuccess,
+    loginFailed,
+
+    logout,
+    logoutSuccess,
+    logoutFaile } from "../Features/Auth/Redux/AuthSlice";
+import { getCurrentUserSaga, loginSaga, logoutSaga } from "../Features/Auth/Redux/auth-saga";
 
 export function* watcherSaga() {
     // yield takeLatest(getTasks.type, getAllTasks);
     // yield takeLatest(addTask.type, addNewTask);
     // yield takeLatest(checkTask.type, checkAtask);
-    // yield takeLatest(deleteTask.type, deleteAtask);
+
+
+    //Auth sagas
+    yield takeLatest(getCurrentUser.type, getCurrentUserSaga);
+    yield takeLatest(login.type, loginSaga);
+    yield takeLatest(logout.type, logoutSaga);
 
 } 
