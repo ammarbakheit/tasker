@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // import { FiPlusCircle, FiCheck, FiTrendingUp } from "react-icons/fi";
 import { IconContext } from "react-icons";
 import SideBar from "./Features/Task/Components/SideBar";
@@ -8,9 +8,10 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import Login from "./Features/Auth/Components/Login";
 import { useEffect, useState } from "react";
 import Intro from "./Features/Intro/Components/Intro";
+import { getCurrentUser } from "./Features/Auth/Redux/AuthSlice";
 
 function App({children}) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const tasks = useSelector(state => state.tasks);
   const user = useSelector(state => state.auth.user);
@@ -20,6 +21,7 @@ const [initialLoading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true)
     const timer = setTimeout(() => {
+      dispatch(getCurrentUser());
       setLoading(false)
     },2000)
 
@@ -28,7 +30,6 @@ const [initialLoading, setLoading] = useState(false);
     }
   }, []);
 
-  console.log(initialLoading);
 
   // console.log(tasks.length);
 
