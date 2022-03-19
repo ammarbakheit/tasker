@@ -1,34 +1,44 @@
-import {put, call} from 'redux-saga/effects'; 
-import { addNewTasktoServer, checkSingleTask, deleteSingleTask, fetchAllTasks } from '../../Data/remoteDataSource';
+import {put, all,call} from 'redux-saga/effects'; 
+import TaskRepository from '../../Repository/TaskRepository';
 
-import { TaskRepository } from '../../Features/Task/Repository/TaskRepository';
+import { setTasksSucess, setTasksFailure, deleteAllTaskSuccess, deleteAllTaskFailure, addTaskSuccess, addTaskFailure, getTasks, deleteTaskSuccess, deleteTaskFailure, editTaskFailure } from '../TaskSlice';
+
+const taskRepo = new TaskRepository();
 
 
 export function* getAllTasksSaga() {
-   
  try { 
-        const response = yield call( () =>  fetchAllTasks());
-        // yield put(setTasksFailures(response))
+       const response = yield call(() => taskRepo.getAllTasksService());
+        console.log("all tasks are ", response);
+       yield put(setTasksSucess(response))
     } catch ( e) {
-        console.log(e);
+     yield  put(setTasksFailure(e))
     }
 }
 
 
 export function* addNewTaskSaga(action) {
-    // console.log(action.payload);
     try {
-        const response =  yield call(() => addNewTasktoServer(action.payload) ) ;
-        // yield put(setTasks(response));
+        const response = yield call(() => taskRepo.addNewTaskService(action.payload));
+        yield put(addTaskSuccess(response));
     } catch (e) {
+        yield put(addTaskFailure(e));
+    }
+}
+export function* EditAtaskSaga(action) {
+    try {
+        yield call(() => taskRepo.editATaskService(action.payload));
+        const response =  yield call(() => taskRepo.getAllTasksService());
+        
+        yield put(setTasksSucess(response));
 
+    } catch (e) {
+        yield put(editTaskFailure(e))
     }
 }
 
-export function* checkAtaskSaga(action) {
+export function* moveAtaskSaga(action) {
     try {
-        const response = yield call( () =>  checkSingleTask(action.payload));
-        // yield put(setTasks(response));
     } catch (e) {
         console.log(e);
     }
@@ -36,9 +46,20 @@ export function* checkAtaskSaga(action) {
 
 export function* deleteAtaskSaga(action) {
     try {
-        const response = yield call( () =>  deleteSingleTask(action.payload));
-        // yield put(setTasks(response));
+       yield call(() => taskRepo.deleteATaskService(action.payload))
+     const response =   yield call(() => taskRepo.getAllTasksService())
+     yield put(setTasksSucess(response));
     } catch (e) {
+        yield put(deleteTaskFailure());
+
+    }
+}
+export function* deleteAllTasksSaga(action) {
+    try {
+      const response = yield call(() => taskRepo.deleteAllTasksService());
+      yield put(deleteAllTaskSuccess(response))
+    } catch (e) {
+        yield put(deleteAllTaskFailure(e))
         console.log(e);
     }
 }

@@ -9,6 +9,7 @@ import Login from "./Features/Auth/Components/Login";
 import { useEffect, useState } from "react";
 import Intro from "./Features/Intro/Components/Intro";
 import { getCurrentUser } from "./Features/Auth/Redux/AuthSlice";
+import { getTasks } from "./Features/Task/Redux/TaskSlice";
 
 function App({children}) {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const [initialLoading, setLoading] = useState(false);
     setLoading(true)
     const timer = setTimeout(() => {
       dispatch(getCurrentUser());
+      dispatch(getTasks());
       setLoading(false)
     },2000)
 
@@ -30,30 +32,28 @@ const [initialLoading, setLoading] = useState(false);
     }
   }, []);
 
-
-  // console.log(tasks.length);
-
+  
   return (
     <DndProvider backend={HTML5Backend}>
-    <IconContext.Provider value={{ color: "white", className: "global-class-name" }}>
+      <IconContext.Provider value={{ color: "white", className: "global-class-name" }}>
 
-      <div className="w-full  bg-white">
-      {
-         initialLoading ? <Intro /> :  <div className=" flex w-full   mx-auto">
-         <SideBar  />
-         <div className="w-full">
-           <NavBar/>
-         {
-             user ? 
-             children : <div className="w-full flex justify-center"> <Login onClose={() => console.log("close")} showLoginForm={true} /> </div>
-         }
-         </div>
+        <div className="w-full  bg-white">
+        {
+          initialLoading ? <Intro /> :  <div className=" flex w-full   mx-auto">
+          <SideBar  />
+          <div className="w-full">
+            <NavBar   />
+          {
+              user ? 
+              children : <div className="w-full flex justify-center"> <Login onClose={() => console.log("close")} showLoginForm={true} /> </div>
+          }
+          </div>
 
-       </div>
-      } 
-      </div>
-    </IconContext.Provider>
-  </DndProvider>
+        </div>
+        } 
+        </div>
+      </IconContext.Provider>
+    </DndProvider>
 
 
   );
