@@ -17,6 +17,7 @@ const taskSlice = createSlice({
 
         ],
         status: Status.idle,
+        reload: false
     },
     reducers: {
         getTasks: () => { },
@@ -90,27 +91,37 @@ const taskSlice = createSlice({
 
         // delete
         deleteTask: (state, action) => {
-
+            state.reload = true;
             state.status = Status.loading;
         },
         deleteTaskSuccess: (state, action) => {
             state.status = Status.success;
-
+            state.reload = false;
         },
         deleteTaskFailure: (state, action) => {
             state.status = Status.failure;
+            state.reload = false;
 
         },
-        deleteAllTask: (state, action) => { },
+
+        // delete ALl tasks
+        deleteAllTask: (state, action) => {
+            state.reload = true;
+         
+         },
         deleteAllTaskSuccess: (state, action) => {
             state.todosList = [];
             state.inProgressList = [];
             state.doneList = [];
+            state.reload = false;
+            
 
             console.log(action.payload);
         },
         deleteAllTaskFailure: (state, action) => {
             console.log(action.payload);
+            state.reload = false;
+
         },
     }
 });

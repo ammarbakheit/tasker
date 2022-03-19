@@ -10,8 +10,8 @@ const SideBar = () => {
 
   const combinedList = [...todosList, ...inProgressList, ...doneList]
   return (
-    <aside className="w-64 ">
-      <div className=" overflow-y-auto h-screen  py-4 px-3 bg-slate-50 rounded border-r-2 border-gray-200">
+    <aside className="w-64  overflow-y-auto min-h-screen  py-4 px-3 bg-slate-50 rounded border-r-2 border-gray-200">
+    
         <Link to="/">
           <div className="flex flex-col justify-start px-2 my-10">
             <span className="text-indigo-600 font-bold text-lg "> Tasker </span>
@@ -55,7 +55,7 @@ const SideBar = () => {
             </Link>
           </li>
         </ul>
-      </div>
+     
 
     </aside>
   );
