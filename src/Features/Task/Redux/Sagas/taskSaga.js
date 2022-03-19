@@ -37,18 +37,14 @@ export function* EditAtaskSaga(action) {
     }
 }
 
-export function* moveAtaskSaga(action) {
-    try {
-    } catch (e) {
-        console.log(e);
-    }
-}
+
 
 export function* deleteAtaskSaga(action) {
     try {
        yield call(() => taskRepo.deleteATaskService(action.payload))
      const response =   yield call(() => taskRepo.getAllTasksService())
      yield put(setTasksSucess(response));
+     yield put(deleteTaskSuccess(response));
     } catch (e) {
         yield put(deleteTaskFailure());
 

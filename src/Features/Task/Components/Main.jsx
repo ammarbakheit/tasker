@@ -12,7 +12,7 @@ const Main = () => {
     const todosList = useSelector(state => state.task.todosList);
     const inProgressList = useSelector(state => state.task.inProgressList);
     const doneList = useSelector(state => state.task.doneList);
-    const status = useSelector(state => state.task.status);
+    const reload = useSelector(state => state.task.reload);
 
 
     const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const Main = () => {
             clearTimeout(timer)
         }
     },
-        []
+        [reload]
         // [todosList, inProgressList, doneList]
     )
 
@@ -79,7 +79,7 @@ const Main = () => {
 
     return (
 
-        <div className="px-10 w-full mt-10">
+        <div className="px-10  mt-10">
             {
                 loading ? <div className='w-full min-h-screen  flex justify-center items-center'><ReactLoading type={"balls"} color={"#6366f1"} height={50} width={50} /></div> : <>
                     <div className='flex justify-between'>

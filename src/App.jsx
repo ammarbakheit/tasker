@@ -41,6 +41,8 @@ const [initialLoading, setLoading] = useState(false);
         {
           initialLoading ? <Intro /> :  <div className=" flex w-full   mx-auto">
           <SideBar  />
+
+         
           <div className="w-full">
             <NavBar   />
           {
